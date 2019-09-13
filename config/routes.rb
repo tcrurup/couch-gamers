@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   root 'sessions#new'
   
   get '/login' => 'sessions#new'
+
+  resources :users, only: [:new]
 end
