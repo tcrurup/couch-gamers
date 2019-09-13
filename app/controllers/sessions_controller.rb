@@ -9,4 +9,8 @@ class SessionsController < ApplicationController
         session[:user_id] = @user.id
         redirect_to user_path (@user)
     end
+
+    def delete
+        session.delete :user_id
+    end
 end
