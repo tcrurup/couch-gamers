@@ -11,8 +11,8 @@ class User < ApplicationRecord
     validates :email, presence: true
 
     def add_to_collection(game)
-        self.games << game unless self.has_in_collection(game)
-        game.users << self        
+        self.games << game unless self.has_in_collection?(game) 
+        game.add_user(self)
     end
 
     def has_in_collection?(game)
