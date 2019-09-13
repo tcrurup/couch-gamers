@@ -1,0 +1,16 @@
+<%= form_for '/login' do |f| %>
+    
+    <h2>Welcome To Couch Gamers</h2>
+    <table>
+        <tr>
+            <td><%= f.label :username %></td>
+            <td><%= f.text_field :username %></td>
+        </tr>
+        <tr>
+            <td><%= f.label :password %></td>
+            <td><%= f.password_field :password %></td>
+        </tr>
+        <tr>
+            <td><%= f.submit "Login" %></td>
+        </tr>
+<% end %>
