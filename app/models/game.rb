@@ -3,6 +3,9 @@ class Game < ApplicationRecord
     has_many :user_games
     has_many :users, through: :user_games
 
+    validates :title, presence: true
+    validates :release_year, presence: true
+
     def is_owned_by?(user)
         self.users.include?(user)
     end
