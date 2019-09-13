@@ -9,6 +9,7 @@ class Game < ApplicationRecord
 
     def add_user(user)
         self.users << user unless self.users.include?(user)
+        user.add_game_to_collection(self)
     end
     
 end
