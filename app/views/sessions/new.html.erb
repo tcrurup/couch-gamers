@@ -1,17 +1,17 @@
-<%= form_for '/login' do |f| %>
+<%= form_tag '/login' do %>
     
     <h2>Welcome To Couch Gamers</h2>
     <table>
         <tr>
-            <td><%= f.label :username %></td>
-            <td><%= f.text_field :username %></td>
+            <td><%= label_tag :username %></td>
+            <td><%= text_field_tag :username %></td>
         </tr>
         <tr>
-            <td><%= f.label :password %></td>
-            <td><%= f.password_field :password %></td>
+            <td><%= label_tag :password %></td>
+            <td><%= password_field_tag :password %></td>
         </tr>
         <tr>
-            <td><%= f.submit "Login" %></td>
+            <td><%= submit_tag "Login" %></td>
         </tr>
     </table>
     <p>Not a member yet? <%= link_to 'Sign up', new_user_path %></p>
