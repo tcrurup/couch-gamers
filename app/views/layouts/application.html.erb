@@ -10,6 +10,11 @@
   </head>
 
   <body>
+    <div class='navbar'>
+      <%= link_to "Home", user_path(current_user) %>  |
+      <%= link_to "Games", games_path %>  |
+      <%= link_to "Members", users_path %> 
+    </div>
     
     <%= yield %>
   </body>
