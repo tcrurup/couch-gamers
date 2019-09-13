@@ -1,3 +1,7 @@
+<% if flash[:message] %>
+    <%= flash[:message] %>
+<% end %>
+
 <%= @user.username %>
 <%= session[:user_id] %>
 <%= link_to "Log out", logout_path %> 

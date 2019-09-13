@@ -1,7 +1,10 @@
 class SessionsController < ApplicationController
 
     def new
-        redirect_to user_path(current_user) if logged_in?        
+        if logged_in?
+            message = "You must log out of this account before signing in"
+            flash_and_redirect_to_show_page(current_user, message) 
+        end        
     end
 
     def create
@@ -12,5 +15,8 @@ class SessionsController < ApplicationController
 
     def delete
         session.delete :user_id
+        redirect_to login_path
     end
+
+    
 end
