@@ -10,6 +10,10 @@ class GamesController < ApplicationController
             render :new
         end
     end
+
+    def edit
+        @game = Game.find_by(id: params[:id])
+    end
     
     def new
         @game = Game.new
