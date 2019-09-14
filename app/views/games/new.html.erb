@@ -1,17 +1,4 @@
-<%= form_for @game do |f| %>    
-    <table>
-        <tr>
-            <td><%= f.label :title %></td>
-            <td><%= f.text_field :title %></td>
-        </tr>
-        <tr>
-            <td><%= f.label :description %></td>
-            <td><%= f.text_area :description %></td>
-        </tr>
-        <tr>
-            <td><%= f.label :release_year %></td>
-            <td><%= f.number_field :release_year %></td>
-        </tr>
-    </table>
-    <%= f.submit "Create Game" %>
-<% end %>
+
+<%= render partial: "shared/flash_message", locals: {object: @game} %>
+
+<%= render partial: "form", locals: {game: @game, button_text: "Create"} %>
