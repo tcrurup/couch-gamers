@@ -22,4 +22,8 @@ class User < ApplicationRecord
     def has_game?(game)
         self.games.include?(game)
     end
+
+    def is_developer?
+        !self.developers.empty?
+    end
 end

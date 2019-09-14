@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#delete'
   
 
-
-  resources :users, only: [:create, :new, :show]
+  resources :developers, only: [:create, :new]
   resources :games
+  resources :users, only: [:create, :new, :show]
+  
 end

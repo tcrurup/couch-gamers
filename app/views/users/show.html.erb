@@ -2,6 +2,10 @@
     <%= flash[:message] %>
 <% end %>
 
+<% if @user.is_developer? %>
+ <h5>Developer</h5>
+<% end %>
+
 <h4><%= @user.username %></h4>
 <h5><%= "#{@user.first_name} #{@user.last_name}" %></h5>
 
