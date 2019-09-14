@@ -8,4 +8,3 @@
 <% @user.games.each do |game| %>
     <%= render partial: "games/card", locals: {game: game} %>
 <% end %>
-<%= link_to "Log out", logout_path %> 
