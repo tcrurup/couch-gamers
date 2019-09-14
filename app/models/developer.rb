@@ -18,8 +18,10 @@ class Developer < ApplicationRecord
     end
 
     def add_game(game)
-        self.games << game unless self.has_game?(game)
-        game.developer = self
+        unless self.has_game?(game)
+            self.games << game 
+            game.developer = self
+        end
     end
 
     def has_employee?(user)

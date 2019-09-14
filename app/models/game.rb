@@ -1,6 +1,7 @@
 class Game < ApplicationRecord
 
-    belongs_to :developer
+    #The optional is temporary, the developer should be the only one able to create games so should belong by default
+    belongs_to :developer, optional: true
     
     has_many :user_games
     has_many :users, through: :user_games
