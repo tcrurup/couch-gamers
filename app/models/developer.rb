@@ -8,6 +8,8 @@ class Developer < ApplicationRecord
         class_name:"User",
         source: :user
 
+    has_many :games
+
     validates :name, presence: true
 
     def add_employee(user)

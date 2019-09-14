@@ -15,6 +15,10 @@ class DevelopersController < ApplicationController
         @developer = Developer.new
     end
 
+    def index
+        @developers = Developer.all
+    end
+
     def show
         @developer = Developer.find_by(id: params[:id])
     end

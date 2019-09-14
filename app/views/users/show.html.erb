@@ -4,5 +4,8 @@
 
 <%= render partial: "infobox", locals: {user: @user} %>
 
+<br><br><br><br>
+
+<h3><%= "#{@user.username}'s Game Collection" %></h3>
 <%= render partial: "games/list", locals: {games: @user.games} %>
 

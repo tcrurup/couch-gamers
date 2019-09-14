@@ -1,5 +1,7 @@
 class Game < ApplicationRecord
 
+    belongs_to :developer
+    
     has_many :user_games
     has_many :users, through: :user_games
 

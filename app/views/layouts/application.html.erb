@@ -14,8 +14,9 @@
       <% if logged_in? %>
         <%= link_to "Home", user_path(current_user) %>  |
         <%= link_to "Games", games_path %>  |
-        <%= link_to "Members", users_path %> 
-        <%= link_to "Log out", logout_path %> 
+        <%= link_to "Members", users_path %>  |
+        <%= link_to "Developers", developers_path %>  |
+        <%= link_to "Log out", logout_path %>  |
       <% end %>
     </div>
     

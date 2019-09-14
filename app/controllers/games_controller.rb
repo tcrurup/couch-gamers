@@ -27,7 +27,11 @@ class GamesController < ApplicationController
     end
 
     def index
-        @games = Game.all
+        if params[:developer_id]
+            @games = Developer.find(params[:developer_id]).games
+        else
+            @games = Game.all
+        end
     end
 
     def show
@@ -49,13 +53,6 @@ class GamesController < ApplicationController
 
     def game_params
         params.require(:game).permit(:title, :description, :release_year)
-    end
-
-    def require_login
-        unless logged_in?
-            flash[:message] = "You must be logged in to do that"
-            redirect_to login_path
-        end
     end
 
     def set_game_by_id
