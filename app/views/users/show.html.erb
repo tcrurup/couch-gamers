@@ -4,6 +4,5 @@
 
 <%= render partial: "infobox", locals: {user: @user} %>
 
-<% @user.games.each do |game| %>
-    <%= render partial: "games/card", locals: {game: game} %>
-<% end %>
+<%= render partial: "games/list", locals: {games: @user.games} %>
+
