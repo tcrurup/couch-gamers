@@ -2,6 +2,10 @@
     <%= flash[:message] %>
 <% end %>
 
-<%= @user.username %>
-<%= session[:user_id] %>
+<h4><%= @user.username %></h4>
+<h5><%= "#{@user.first_name} #{@user.last_name}" %></h5>
+
+<% @user.games.each do |game| %>
+    <%= render partial: "games/card", locals: {game: game} %>
+<% end %>
 <%= link_to "Log out", logout_path %> 
