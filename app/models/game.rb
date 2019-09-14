@@ -11,8 +11,8 @@ class Game < ApplicationRecord
     end
 
     def add_user(user)
-        self.users << user unless self.users.include?(user)
-        user.add_game_to_collection(self)
+        self.users << user unless self.is_owned_by(user)
+        user.games << self unless user.has_game?(self)
     end
     
 end

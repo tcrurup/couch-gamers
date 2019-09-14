@@ -11,11 +11,11 @@ class User < ApplicationRecord
     validates :email, presence: true
 
     def add_to_collection(game)
-        self.games << game unless self.has_in_collection?(game) 
-        game.add_user(self)
+        self.games << game unless self.has_game?(game)   
+        game.users << self unless game.is_owned_by?(self) 
     end
 
-    def has_in_collection?(game)
+    def has_game?(game)
         self.games.include?(game)
     end
 end

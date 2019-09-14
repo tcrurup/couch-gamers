@@ -52,8 +52,10 @@ class GamesController < ApplicationController
     end
 
     def require_login
-        flash[:message] = "You must be logged in to do that"
-        redirect_to login_path
+        unless logged_in?
+            flash[:message] = "You must be logged in to do that"
+            redirect_to login_path
+        end
     end
 
     def set_game_by_id
