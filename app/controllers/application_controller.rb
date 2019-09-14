@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
     private
 
+
     def flash_and_redirect_to_show_page(object, message)
         flash[:message] = message
         redirect_to :controller => object.class.table_name, :action=> 'show', :id => object.id

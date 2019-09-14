@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+    
+    before_action :require_login
 
     def create
         @game = Game.new(game_params)
@@ -47,6 +49,11 @@ class GamesController < ApplicationController
 
     def game_params
         params.require(:game).permit(:title, :description, :release_year)
+    end
+
+    def require_login
+        flash[:message] = "You must be logged in to do that"
+        redirect_to login_path
     end
 
     def set_game_by_id
