@@ -12,7 +12,7 @@ class GamesController < ApplicationController
     end
 
     def edit
-        @game = Game.find_by(id: params[:id])
+        set_game_by_id
     end
     
     def new
@@ -24,11 +24,11 @@ class GamesController < ApplicationController
     end
 
     def show
-        @game = Game.find_by(id: params[:id])
+        set_game_by_id
     end
 
     def update
-        @game = Game.find_by(id: params[:id])
+        set_game_by_id
         @game.update(game_params)
 
         if @game.valid?
@@ -42,5 +42,9 @@ class GamesController < ApplicationController
 
     def game_params
         params.require(:game).permit(:title, :description, :release_year)
+    end
+
+    def set_game_by_id
+        @game = Game.find_by(id: params[:id])
     end
 end
