@@ -13,6 +13,10 @@ class Game < ApplicationRecord
         self.users.include?(user)
     end
 
+    def has_developer?(user)
+        self.developer.has_employee?(user)    
+    end
+
     def add_user(user)
         self.users << user unless self.is_owned_by(user)
         user.games << self unless user.has_game?(self)
