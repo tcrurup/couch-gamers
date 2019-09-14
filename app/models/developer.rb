@@ -17,7 +17,16 @@ class Developer < ApplicationRecord
         user.developers << self unless user.works_for?(self)
     end
 
+    def add_game(game)
+        self.games << game unless self.has_game?(game)
+        game.developer = self
+    end
+
     def has_employee?(user)
         self.employees.include?(user)
+    end
+
+    def has_game?(game)
+        self.games.include?(game)
     end
 end
