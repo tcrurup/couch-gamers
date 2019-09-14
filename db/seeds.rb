@@ -14,6 +14,10 @@ GAMES = [
     {title: "Banjo Kazooie", description: "A collectathon 3D platformer", release_year: 1998}
 ]
 
+DEVELOPERS = [
+    {name: "Rare"}
+]
+
 GAMES.each do |game|
     Game.create(game)
 end
@@ -22,4 +26,13 @@ USERS.each do |user|
     User.create(user)
 end
 
-User.all.first.add_to_collection(Game.all.first)
+DEVELOPERS.each do |developer|
+    Developer.create(developer)
+end
+
+user1 = User.first
+game1 = Game.first
+developer1 = Developer.first
+
+user1.add_game(game1)
+user1.add_developer(developer1)

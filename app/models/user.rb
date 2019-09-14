@@ -19,7 +19,7 @@ class User < ApplicationRecord
         developers.employees << self unless developer.has_employee?(self)
     end
 
-    def add_to_collection(game)
+    def add_game(game)
         self.games << game unless self.has_game?(game)   
         game.users << self unless game.is_owned_by?(self) 
     end
