@@ -14,6 +14,11 @@ class User < ApplicationRecord
     validates :last_name, presence: true
     validates :email, presence: true
 
+    def add_developer(developer)
+        self.developers << developer unless self.works_for?(developer)
+        developers.employees << self unless developer.has_employee?(self)
+    end
+
     def add_to_collection(game)
         self.games << game unless self.has_game?(game)   
         game.users << self unless game.is_owned_by?(self) 
@@ -26,4 +31,9 @@ class User < ApplicationRecord
     def is_developer?
         !self.developers.empty?
     end
+
+    def works_for?(developer)
+        self.developers.include?(developer)
+    end
+
 end
