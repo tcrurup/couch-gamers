@@ -35,7 +35,16 @@ class GamesController < ApplicationController
     end
 
     def show
-        set_game_by_id
+        if params[:developer_id]
+            @developer = Developer.find(params[:developer_id])
+            @game = @developer.games.find_by(id: params[:id])
+            if @game.nil? 
+                message = "#{@developer.name} does not have a game with that id"
+                flash_and_redirect_to_show_page(@developer, message)
+            end                
+        else
+            set_game_by_id
+        end
     end
 
     def update

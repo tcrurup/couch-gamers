@@ -1,7 +1,5 @@
-<% if flash[:message] %>
-    <%= flash[:message] %>
-<% end %>
 
+<%= render 'shared/flash_message' %>
 <%= render partial: "infobox", locals: {user: @user} %>
 
 <br><br><br><br>
