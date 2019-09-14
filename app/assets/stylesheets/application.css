@@ -15,14 +15,22 @@
  */
 
  div.game_card{
-    max-width: 20em;
+    width: 400px;
+    height: 50vh;
     border: 2px solid black;
     border-radius: 15px;
-    margin: 1em;
+    padding: 3px;
+    margin: 5px;
+ }
+
+ div.game_card_container{
+    
+    display: flex;
+    flex-wrap: wrap;
  }
 
  div.game_card_title{
-    text-align: center
+    text-align: center;
  }
 
  p.game_card_description{
@@ -31,5 +39,15 @@
 
  div.game_card_release_year{
      font-size: 14px;
-     text-align: center
+     text-align: center;
  }
+
+ div.page_title{
+     font-weight: bold;
+     font-size: 28px;
+     margin-top: 20px;
+     margin-bottom: 20px;
+     text-align: center;
+ }
+
+ 
