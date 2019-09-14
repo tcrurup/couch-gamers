@@ -24,6 +24,14 @@ class Developer < ApplicationRecord
         end
     end
 
+    def employee_count
+        self.employees.count
+    end
+
+    def game_count
+        self.games.count
+    end
+
     def has_employee?(user)
         self.employees.include?(user)
     end
