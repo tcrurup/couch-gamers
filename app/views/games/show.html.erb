@@ -3,3 +3,6 @@
 <%= @game.release_year %>
 
 <%= link_to "Edit Game", edit_game_path(@game) %>
+<%= form_tag(@game, :method => :delete) do %>
+    <%= submit_tag "Delete" %>
+<% end %>
