@@ -1,5 +1,13 @@
-<div>
-    <%= link_to game.title, game_path(game) %>
-    <%= game.description %>
-    <%= game.release_year %>
+<div class='game_card'>
+    
+    <div class = 'game_card_title'>
+        <%= link_to game.title, game_path(game) %>
+    </div>
+    
+    
+    <div class = game_card_release_year> 
+        <%= "Released in #{game.release_year} by" %> <%= link_to game.developer.name, developer_path(game.developer) %> 
+    </div> 
+
+    <p class='game_card_description'> <%= game.description %> </p>    
 </div>
