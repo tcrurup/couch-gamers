@@ -1,3 +1,8 @@
 
 <%= render 'shared/flash_message' %>
+
 <%= @developer.name %>
+
+<%= render partial: 'employee_table', locals: {users: @developer.employees} %>
+<%= render partial: 'games/list', locals: {games: @developer.games} %>
+
