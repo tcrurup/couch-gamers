@@ -6,7 +6,7 @@ class Developer < ApplicationRecord
         through: :user_developers, 
         foreign_key: "user_id", 
         class_name:"User",
-        source: :developer
+        source: :user
 
     validates :name, presence: true
 
