@@ -14,6 +14,10 @@
  *= require_self
  */
 
+ body{
+     margin: 0;
+ }
+ 
  div.game_card{
     width: 500px;
     height: 300px;
@@ -23,8 +27,7 @@
     margin: 5px;
  }
 
- div.game_card_container{
-    
+ div.game_card_container{    
     display: flex;
     flex-wrap: wrap;
  }
@@ -57,11 +60,24 @@ div.game_card_header img{
  }
 
  div.page_title{
-     font-weight: bold;
-     font-size: 28px;
-     margin-top: 20px;
-     margin-bottom: 20px;
-     text-align: center;
+    font-weight: bold;
+    font-size: 28px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+ }
+
+ div.navbar{
+    background-color: rgb(88, 158, 238);   
+    text-align: center;
+    height: 35px;
+    vertical-align: middle;
+ }
+
+ div.navbar a{
+    font-weight: bold;
+    padding-top: 10px;
+    display: inline-block;
  }
 
  
