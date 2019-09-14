@@ -24,6 +24,10 @@ class User < ApplicationRecord
         game.users << self unless game.is_owned_by?(self) 
     end
 
+    def full_name
+        "#{self.first_name.capitalize} #{self.last_name.capitalize}"
+    end
+
     def has_game?(game)
         self.games.include?(game)
     end

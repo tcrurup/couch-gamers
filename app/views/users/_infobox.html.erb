@@ -1,0 +1,14 @@
+
+<div class='infobox'>
+    <h4>Username: <%= user.username %></h4>
+    <h5>Fullname: <%= user.full_name %></h5>
+    <h5>Email: <%= user.email %></h5>
+    <% if user.is_developer? %>
+        <% user.developers.each do |developer| %>
+            Developer for <%= link_to developer.name, developer_path(developer) %>
+        <% end %>
+    <% end %>
+</div>
+    
+
+
