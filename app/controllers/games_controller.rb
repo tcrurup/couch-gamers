@@ -4,7 +4,6 @@ class GamesController < ApplicationController
 
     def create
         @game = Game.new(game_params)
-        
         if @game.valid?
             @game.save
             redirect_to game_path(@game)
@@ -23,7 +22,7 @@ class GamesController < ApplicationController
     end
     
     def new
-        @game = Game.new
+        @game = Game.new(developer_id: params[:developer_id])
     end
 
     def index
@@ -61,7 +60,7 @@ class GamesController < ApplicationController
     private
 
     def game_params
-        params.require(:game).permit(:title, :description, :release_year)
+        params.require(:game).permit(:title, :description, :release_year, :developer_id)
     end
 
     def set_game_by_id

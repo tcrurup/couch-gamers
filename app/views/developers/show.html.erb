@@ -3,6 +3,7 @@
 
 <%= @developer.name %>
 
+<%= button_to "Add Game", new_developer_game_path(@developer), :method => :get %>
 <%= render partial: 'employee_table', locals: {users: @developer.employees} %>
 <%= render partial: 'games/list', locals: {games: @developer.games} %>
 
