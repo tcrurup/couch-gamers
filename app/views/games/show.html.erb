@@ -1,5 +1,5 @@
 <%= render "shared/flash_message" %>
-<%= render partial: 'card', locals: {game: @game} %>
+<%= render partial: 'card', locals: {game: @game, include_button: true} %>
 
 
 <% if @game.has_developer?(current_user) %>
