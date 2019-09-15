@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
 
+    def add_to_current_users_games
+        @game = Game.find_by(id: params[:game_id])
+        current_user.add_game(@game)
+        redirect_to user_path(current_user)
+    end
+    
     def create
         @user = User.new(user_params)
         if @user.valid?

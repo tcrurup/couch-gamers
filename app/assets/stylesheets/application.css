@@ -18,6 +18,10 @@
      margin: 0;
  }
 
+ a{
+    text-decoration: none;
+ }
+
  /*GAME CARD*/
  
  div.game_card{
