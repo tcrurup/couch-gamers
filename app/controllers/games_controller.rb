@@ -13,8 +13,18 @@ class GamesController < ApplicationController
     end
 
     def destroy
-        Game.find_by(id: params[:id]).destroy
-        redirect_to games_path
+        @game = Game.find_by(id: params[:id])
+        @developer = Developer.find_by(id: params[:developer_id])
+
+        errors = ["There was a problem with the following:"]
+        errors << "#{@developer.name} does no own #{@game.title}" unless @developer.has_game?(@game)
+        errors << "You are not a developer for #{@developer.name}" unless @developer.has_employee?(current_user)
+        
+        if errors.length > 1 
+            flash_and_redirect_to_show_page(@game, errors.join(" "))       
+        else
+            redirect_to games_path
+        end
     end
 
     def edit

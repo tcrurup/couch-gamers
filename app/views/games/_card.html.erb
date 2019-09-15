@@ -5,7 +5,7 @@
         
     
         <span class='game_card_title'> 
-            <%= link_to game.title, game_path(game) %> 
+            <%= link_to game.title, developer_game_path(game.developer, game) %> 
         </span>
 
         <span class='game_card_release_year'> 

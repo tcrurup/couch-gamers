@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :developers, only: [:create, :new, :index, :show] do
     resources :games
   end
-  resources :games
+  resources :games, only: [:index]
   resources :users, only: [:create, :new, :show]
   
 end
