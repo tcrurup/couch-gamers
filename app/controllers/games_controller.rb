@@ -23,6 +23,7 @@ class GamesController < ApplicationController
         if errors.length > 1 
             flash_and_redirect_to_show_page(@game, errors.join(" "))       
         else
+            @game.destroy
             redirect_to games_path
         end
     end
