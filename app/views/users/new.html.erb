@@ -1,7 +1,6 @@
-<%= form_for @user do |f| %>
+<%= render partial: "shared/flash_message", locals: {object: @user} %>
 
-    <%= render partial: "shared/flash_message", locals: {object: @user} %>
-    
+<%= form_for @user do |f| %>    
     <table>
         <tr>
             <td><%= f.label :username %></td>

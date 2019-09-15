@@ -1,6 +1,7 @@
 
 <%= render 'shared/flash_message' %>
 <%= render partial: "infobox", locals: {user: @user} %>
+<%= link_to "edit profile", edit_user_path if @user == current_user%>
 
 <br><br><br><br>
 
