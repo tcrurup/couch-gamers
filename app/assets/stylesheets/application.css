@@ -30,6 +30,7 @@
     border: 2px solid black;
     border-radius: 15px;
     padding: 3px;
+    position: relative;
     margin: 5px;
  }
 
@@ -40,9 +41,26 @@
 
  div.game_card_header{
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
+    justify-content: space-between;
     max-height: 40%;
+    width: 95%;
+    position: absolute;
+    top: 0;
+    margin: 2%;
+ }
+ 
+ p.game_card_description{
+    font-size: 12px;
+    position: absolute;
+    top: 40%;
+ }
+
+ div.game_card_footer{
+    vertical-align: bottom;
+    position: absolute;
+    bottom: 0;
+    margin: 8px;
  }
 
 div.game_card_header img{
@@ -50,12 +68,10 @@ div.game_card_header img{
     border-radius: 10px;
     width: 200px;
     height: 100px;
-    margin: auto;
     text-align: center;
+    align-self: flex-end;
 }
- p.game_card_description{
-    font-size: 12px;
- }
+
 
  span.game_card_release_year{
      font-size: 14px;
