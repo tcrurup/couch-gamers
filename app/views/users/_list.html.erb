@@ -1,0 +1,6 @@
+<div class='user_card_container'>
+    <div class='list_title'> <%= list_title %> </div>
+    <% users.each do |user| %>
+        <%= render partial: 'infobox', locals: {user: user, include_go_to_button: include_buttons} %>
+    <% end %>
+</div>

@@ -1,3 +1,8 @@
-<% @users.each do |user| %>
-    <%= render partial: 'infobox', locals: {user: user, include_go_to_button: true} %>
-<% end %>
+<%= 
+    render partial: 'list', 
+    locals: {
+        users: @users, 
+        list_title: "All Members", 
+        include_buttons: true
+    } 
+%>

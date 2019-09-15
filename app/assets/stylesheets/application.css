@@ -37,6 +37,10 @@
  div.game_card_container{    
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
  }
 
  div.game_card_header{
@@ -90,12 +94,14 @@ div.game_card_header img{
      width: 40vw;
  }
 
- div.page_title{
+ div.list_title{
+    display: block;
     font-weight: bold;
     font-size: 28px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     text-align: center;
+    width: 100%;
  }
 
  table{
@@ -159,6 +165,15 @@ div.user_data{
 
 div.user_data table td{
     text-align: left;
+}
+
+div.user_card_container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
 }
 
  
