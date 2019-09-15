@@ -143,6 +143,12 @@ div.game_card_header img{
     margin-right: 15px;
  }
 
+ div.infobox img.missing{
+    border: 2px dotted black;
+    border-radius: 10px;
+    width: 150px;
+ }
+
 table.user_data{
     align-self: flex-start;
     margin-top: auto;

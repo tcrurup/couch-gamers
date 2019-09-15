@@ -2,9 +2,9 @@ module UsersHelper
 
     def user_picture(user)
         if user.image
-            image_url user.image, alt:"No Picture Available"
+            image_tag user.image, alt:"No Picture Available"
         else
-            image_tag "", alt:"No Picture Available"
+            image_tag "", alt:"Not Available", class:"missing"
         end
     end
 end

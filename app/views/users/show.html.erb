@@ -3,7 +3,6 @@
 <%= render partial: "infobox", locals: {user: @user} %>
 <%= link_to "edit profile", edit_user_path if @user == current_user%>
 
-<br><br><br><br>
 
 <h3><%= "#{@user.username}'s Game Collection" %></h3>
 <%= render partial: "games/list", locals: {games: @user.games, include_add_button_on_cards: false} %>
