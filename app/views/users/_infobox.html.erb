@@ -2,20 +2,20 @@
 <div class='infobox'>
     <table class = 'user_data'>
         <tr> 
-            <th>Username: </th>
+            <th class='label'>Username: </th>
             <td><%= user.username %></td>
         </tr>
         <tr> 
-            <th>Fullname: </th>
+            <th class='label'>Fullname: </th>
             <td><%= user.full_name %></td>
         </tr>
         <tr> 
-            <th>Email: </th>
+            <th class='label'>Email: </th>
             <td><%= user.email %></td>
         </tr>
         <% if user.is_developer? %>
             <tr>
-                <th>Developer for</th>
+                <th class='label'>Developer for</th>
                 <% user.developers.each do |developer| %>
                     <td><%= link_to developer.name, developer_path(developer) %></td>
                 <% end %>                    

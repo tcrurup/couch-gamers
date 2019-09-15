@@ -102,9 +102,8 @@ div.game_card_header img{
      margin: auto;
  }
 
- table td.label{
+ table th.label{
      text-align: right;
-     font-weight: bold;
  }
 
  /*NAVBAR*/
@@ -153,7 +152,7 @@ table.user_data{
     align-self: flex-start;
     margin-top: auto;
     margin-bottom: auto;
-    margin-left: 8px;
+    margin-left: 15px;
     font-size: 14px;
 }
 
