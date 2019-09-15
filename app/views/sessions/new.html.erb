@@ -1,20 +1,22 @@
-<%= flash[:message] if flash[:message] %>
+<%= render "shared/flash_message" %>
 
 
-<h2>Welcome To Couch Gamers</h2>
-<%= form_tag '/login' do %>
-    <table>
-        <tr>
-            <td><%= label_tag :username %></td>
-            <td><%= text_field_tag :username %></td>
-        </tr>
-        <tr>
-            <td><%= label_tag :password %></td>
-            <td><%= password_field_tag :password %></td>
-        </tr>
-        <tr>
-            <td><%= submit_tag "Login" %></td>
-        </tr>
-    </table>
-    <p>Not a member yet? <%= link_to 'Sign up', new_user_path %></p>
-<% end %>
+<div class='container'>
+    <h2>Welcome To Couch Gamers</h2>
+    <%= form_tag '/login' do %>
+        <table>
+            <tr>
+                <td><%= label_tag :username %></td>
+                <td><%= text_field_tag :username %></td>
+            </tr>
+            <tr>
+                <td><%= label_tag :password %></td>
+                <td><%= password_field_tag :password %></td>
+            </tr>
+            <tr>
+                <td><%= submit_tag "Login" %></td>
+            </tr>
+        </table>
+        <p>Not a member yet? <%= link_to 'Sign up', new_user_path %></p>
+    <% end %>
+</div>

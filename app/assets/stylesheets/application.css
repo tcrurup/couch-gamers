@@ -17,6 +17,8 @@
  body{
      margin: 0;
  }
+
+ /*GAME CARD*/
  
  div.game_card{
     width: 500px;
@@ -59,6 +61,15 @@ div.game_card_header img{
 
  }
 
+/*GENERAL*/
+
+ div.container{
+     text-align: center;
+     margin-left: auto;
+     margin-right: auto;
+     width: 40vw;
+ }
+
  div.page_title{
     font-weight: bold;
     font-size: 28px;
@@ -66,6 +77,12 @@ div.game_card_header img{
     margin-bottom: 20px;
     text-align: center;
  }
+
+ table{
+     margin: auto;
+ }
+
+ /*NAVBAR*/
 
  div.navbar{
     background-color: rgb(88, 158, 238);   

@@ -1,8 +1,12 @@
-<%= form_for @user do |f| %>    
+<%= form_for user do |f| %>    
     <table>
         <tr>
             <td><%= f.label :username %></td>
             <td><%= f.text_field :username %></td>
+        </tr>
+        <tr>
+            <td><%= f.label :password %></td>
+            <td><%= f.password_field :password %></td>
         </tr>
         <tr>
             <td><%= f.label :first_name %></td>
@@ -15,18 +19,8 @@
         <tr>
             <td><%= f.label :email %></td>
             <td><%= f.text_field :email %></td>
-        </tr>
-        <tr> 
-            <th colspan=2>Enter Password To Confirm Changes</th> 
-        </tr>
-        
-        <tr>
-            <td><%= f.label :password %></td>
-            <td><%= f.password_field :password %></td>
-        </tr>
+        </tr>     
     </table>
 
-
-
-    <%=f.submit "Edit Profile" %>
+    <%=f.submit button_text %>
 <% end %>
