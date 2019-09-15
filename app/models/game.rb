@@ -1,5 +1,7 @@
 class Game < ApplicationRecord
 
+    scope :all_developed_by, -> {}
+
     #The optional is temporary, the developer should be the only one able to create games so should belong by default
     belongs_to :developer, optional: true
     

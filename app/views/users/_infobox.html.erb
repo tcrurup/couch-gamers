@@ -1,13 +1,30 @@
 
 <div class='infobox'>
-    <h4>Username: <%= user.username %></h4>
-    <h5>Fullname: <%= user.full_name %></h5>
-    <h5>Email: <%= user.email %></h5>
-    <% if user.is_developer? %>
-        <% user.developers.each do |developer| %>
-            Developer for <%= link_to developer.name, developer_path(developer) %>
+    <table class = 'user_data'>
+        <tr> 
+            <th>Username: </th>
+            <td><%= user.username %></td>
+        </tr>
+        <tr> 
+            <th>Fullname: </th>
+            <td><%= user.full_name %></td>
+        </tr>
+        <tr> 
+            <th>Email: </th>
+            <td><%= user.email %></td>
+        </tr>
+        <% if user.is_developer? %>
+            <tr>
+                <th>Developer for</th>
+                <% user.developers.each do |developer| %>
+                    <td><%= link_to developer.name, developer_path(developer) %></td>
+                <% end %>                    
+            </tr>            
         <% end %>
-    <% end %>
+    </table>
+    
+    
+    <%= user_picture(user) %>
 </div>
     
 

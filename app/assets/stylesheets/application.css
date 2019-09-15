@@ -122,4 +122,33 @@ div.game_card_header img{
     display: inline-block;
  }
 
+ /*USERS*/
+
+ div.infobox{
+     width: 500px;
+     height: 200px;
+     border: 2px solid black;
+     margin: 15px;
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+ }
+
+ div.infobox img{
+    align-self: flex-end;
+    height: 95%;
+    width: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 15px;
+ }
+
+table.user_data{
+    align-self: flex-start;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 8px;
+    font-size: 14px;
+}
+
  
