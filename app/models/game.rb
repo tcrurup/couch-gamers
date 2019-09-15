@@ -21,5 +21,9 @@ class Game < ApplicationRecord
         self.users << user unless self.is_owned_by(user)
         user.games << self unless user.has_game?(self)
     end
+
+    def user_count
+        self.users.count
+    end
     
 end

@@ -9,9 +9,13 @@ Rails.application.routes.draw do
   
 
   resources :developers, only: [:create, :new, :index, :show] do
-    resources :games
+    resources :games do 
+      resources :users, only: [:index]
+    end
   end
+
   resources :games, only: [:index]
-  resources :users, only: [:create, :edit, :new, :show]
+
+  resources :users, only: [:create, :edit, :index, :new, :show]
   
 end
