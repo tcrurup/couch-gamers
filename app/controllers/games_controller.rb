@@ -3,18 +3,26 @@ class GamesController < ApplicationController
     before_action :require_login
 
     def create
-        @game = Game.new(game_params)
-        if @game.valid?
-            @game.save
-            redirect_to developer_game_path(@game.developer, @game)
+       
+        set_developer_by_id
+        if current_user_works_for_developer? == true
+            
+            @game = Game.new(game_params)
+
+            if @game.valid?
+                @game.save
+                redirect_to developer_game_path(@game.developer, @game)
+            else
+                render :new
+            end
         else
-            render :new
+            redirect_to user_path(current_user)
         end
     end
 
     def destroy
         @game = Game.find_by(id: params[:id])
-        @developer = Developer.find_by(id: params[:developer_id])
+        set_developer_by_id
 
         errors = ["There was a problem with the following:"]
         errors << "#{@developer.name} does no own #{@game.title}" unless @developer.has_game?(@game)
@@ -33,7 +41,14 @@ class GamesController < ApplicationController
     end
     
     def new
-        @game = Game.new(developer_id: params[:developer_id])
+        set_developer_by_id
+        if @developer.nil?
+            flash_and_redirect_to_show_page(current_user, "No developer with that id")
+        elsif current_user.works_for?(@developer)
+            @game = Game.new(developer_id: @developer.id)
+        else
+            flash_and_redirect_to_show_page(current_user, "You don't work for #{@developer.name}")
+        end
     end
 
     def index
@@ -46,7 +61,7 @@ class GamesController < ApplicationController
 
     def show
         if params[:developer_id]
-            @developer = Developer.find(params[:developer_id])
+            set_developer_by_id
             @game = @developer.games.find_by(id: params[:id])
             if @game.nil? 
                 message = "#{@developer.name} does not have a game with that id"
@@ -70,11 +85,25 @@ class GamesController < ApplicationController
 
     private
 
+    def current_user_works_for_developer?        
+        if @developer.nil?
+            flash[:message] = "No developer with id#{params[:developer_id]}"
+        elsif !current_user.works_for?(@developer)
+            flash[:message] = "You dont work for #{@developer.name}"
+        else
+            true
+        end
+    end
+
     def game_params
         params.require(:game).permit(:title, :description, :release_year, :developer_id)
     end
 
     def set_game_by_id
         @game = Game.find_by(id: params[:id])
+    end
+
+    def set_developer_by_id
+        @developer = Developer.find_by(id: params[:developer_id])
     end
 end
