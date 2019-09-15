@@ -1,27 +1,29 @@
 
 <div class='infobox'>
-    <table class = 'user_data'>
-        <tr> 
-            <th class='label'>Username: </th>
-            <td><%= user.username %></td>
-        </tr>
-        <tr> 
-            <th class='label'>Fullname: </th>
-            <td><%= user.full_name %></td>
-        </tr>
-        <tr> 
-            <th class='label'>Email: </th>
-            <td><%= user.email %></td>
-        </tr>
-        <% if user.is_developer? %>
-            <tr>
-                <th class='label'>Developer for</th>
-                <% user.developers.each do |developer| %>
-                    <td><%= link_to developer.name, developer_path(developer) %></td>
-                <% end %>                    
-            </tr>            
-        <% end %>
-    </table>
+    
+    <div class='user_data'>
+        <h2><%= user.full_name %></h2>
+        <br>
+        <table class>
+            <tr> 
+                <th class='label'>Username: </th>
+                <td><%= user.username %></td>
+            </tr>
+            <tr> 
+                <th class='label'>Email: </th>
+                <td><%= user.email %></td>
+            </tr>
+            <% if user.is_developer? %>
+                <tr>
+                    <th class='label'>Developer for</th>
+                    <% user.developers.each do |developer| %>
+                        <td><%= link_to developer.name, developer_path(developer) %></td>
+                    <% end %>                    
+                </tr>            
+            <% end %>
+        </table>
+        <%= button_to "Go to page", user_path(user), method: :get if include_go_to_button %>
+    </div>
     
     
     <%= user_picture(user) %>

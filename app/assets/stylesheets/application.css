@@ -135,7 +135,7 @@ div.game_card_header img{
 
  div.infobox img{
     align-self: flex-end;
-    height: 95%;
+    height: 90%;
     width: auto;
     margin-top: auto;
     margin-bottom: auto;
@@ -145,15 +145,20 @@ div.game_card_header img{
  div.infobox img.missing{
     border: 2px dotted black;
     border-radius: 10px;
-    width: 150px;
+    width: 180px;
  }
 
-table.user_data{
+div.user_data{
     align-self: flex-start;
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 15px;
     font-size: 14px;
+    text-align: center;
+}
+
+div.user_data table td{
+    text-align: left;
 }
 
  

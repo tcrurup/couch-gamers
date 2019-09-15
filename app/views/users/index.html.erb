@@ -1,3 +1,3 @@
 <% @users.each do |user| %>
-    <%= user.full_name %>
+    <%= render partial: 'infobox', locals: {user: user, include_go_to_button: true} %>
 <% end %>
