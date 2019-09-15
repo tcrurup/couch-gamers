@@ -6,7 +6,7 @@ class GamesController < ApplicationController
         @game = Game.new(game_params)
         if @game.valid?
             @game.save
-            redirect_to game_path(@game)
+            redirect_to developer_game_path(@game.developer, @game)
         else
             render :new
         end
