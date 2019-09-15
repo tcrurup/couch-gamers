@@ -9,6 +9,10 @@ class Game < ApplicationRecord
     validates :title, presence: true
     validates :release_year, presence: true
 
+    def developer_id
+        self.developer.id
+    end
+    
     def is_owned_by?(user)
         self.users.include?(user)
     end

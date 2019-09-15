@@ -15,7 +15,13 @@ class UsersController < ApplicationController
     end
 
     def index
-        @users = User.all
+        if params[:developer_id] && params[:game_id]
+            @developer = Developer.find_by(id: params[:developer_id])
+            @game = @developer.games.find_by(id: params[:game_id])
+            @users = @game.users
+        else 
+            @users = User.all
+        end
     end
     
     def new
