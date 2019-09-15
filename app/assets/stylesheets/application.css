@@ -82,6 +82,11 @@ div.game_card_header img{
      margin: auto;
  }
 
+ table td.label{
+     text-align: right;
+     font-weight: bold;
+ }
+
  /*NAVBAR*/
 
  div.navbar{
