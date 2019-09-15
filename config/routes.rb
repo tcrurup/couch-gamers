@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#delete'
 
   post '/add_to_current_users_games/:game_id' => 'users#add_to_current_users_games'
+
+  get '/auth/facebook/callback' => 'sessions#create'
   
 
   resources :developers, only: [:create, :new, :index, :show] do

@@ -17,6 +17,7 @@
                 <td><%= submit_tag "Login" %></td>
             </tr>
         </table>
+        <%= link_to('Log in with Facebook', '/auth/facebook') %>
         <p>Not a member yet? <%= link_to 'Sign up', new_user_path %></p>
     <% end %>
 </div>

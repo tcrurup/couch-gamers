@@ -28,6 +28,13 @@ class User < ApplicationRecord
         "#{self.first_name.capitalize} #{self.last_name.capitalize}"
     end
 
+    def full_name=(full_name)
+        split_name = full_name.split(" ")
+        self.first_name = split_name.first
+        self.last_name = split_name.last
+        self.save
+    end
+
     def has_game?(game)
         self.games.include?(game)
     end
