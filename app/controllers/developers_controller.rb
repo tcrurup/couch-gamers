@@ -2,8 +2,9 @@ class DevelopersController < ApplicationController
 
     def create
         @developer = Developer.new(developer_params)
+        @developer.owner = current_user
         if @developer.valid?
-            @developer.owner = current_user
+            
             @developer.save
             redirect_to developer_path(@developer)
         else

@@ -2,6 +2,8 @@ class User < ApplicationRecord
 
     has_secure_password
 
+    has_one :ownedDeveloper,
+        class_name: "Developer"        
     
     has_many :user_developers
     has_many :developers, through: :user_developers

@@ -1,7 +1,11 @@
 class Developer < ApplicationRecord
 
     has_many :user_developers
-    
+
+    belongs_to :owner,
+        foreign_key: "user_id",
+        class_name:"User"
+
     has_many :employees, 
         through: :user_developers, 
         foreign_key: "user_id", 
