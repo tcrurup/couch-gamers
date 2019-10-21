@@ -2,8 +2,12 @@
 <%= render 'shared/flash_message' %>
 
 <%= @developer.name %>
+<br>
+owned by
+<%= link_full_name_to_show_page(@developer.owner) %>
 
 <%= button_to "Add Game", new_developer_game_path(@developer), :method => :get %>
+
 <%= render partial: 'employee_table', locals: {users: @developer.employees} %>
 <%= render partial: 'games/list', locals: {games: @developer.games} %>
 

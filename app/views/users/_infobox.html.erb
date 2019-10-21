@@ -23,7 +23,10 @@
             <% end %>
         </table>
         <%= button_to "Go to page", user_path(user), method: :get%>
-        <%= button_to "Add to #{current_user.developer_name}", developer_user_path(current_user.owned_developer, user), method: :patch %>
+        
+        <% if current_user.owns_developer? && !user.works_for?(current_user.owned_developer) %>
+            <%= button_to "Add to #{current_user.developer_name}", developer_user_path(current_user.owned_developer, user), method: :patch %>
+        <% end %>
     </div>
     
     

@@ -54,6 +54,10 @@ class User < ApplicationRecord
         !self.developers.empty?
     end
 
+    def owns_developer?
+        !!self.owned_developer
+    end
+
     def works_for?(developer)
         self.developers.include?(developer) || self.owned_developer === developer
     end

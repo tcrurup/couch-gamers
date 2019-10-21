@@ -4,7 +4,8 @@ class Developer < ApplicationRecord
 
     belongs_to :owner,
         foreign_key: "user_id",
-        class_name:"User"
+        class_name:"User",
+        optional: true
 
     has_many :employees, 
         through: :user_developers, 
@@ -29,7 +30,8 @@ class Developer < ApplicationRecord
     end
 
     def employee_count
-        self.employees.count
+        count = self.employees.count
+        count += 1 if !!self.owner
     end
 
     def game_count
@@ -42,5 +44,9 @@ class Developer < ApplicationRecord
 
     def has_game?(game)
         self.games.include?(game)
+    end
+
+    def owner_name
+        self.owner.full_name
     end
 end

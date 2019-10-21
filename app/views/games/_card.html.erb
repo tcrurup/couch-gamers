@@ -11,7 +11,8 @@
             <br>
 
             <span class='game_card_release_year'> 
-                <%= "Released in #{game.release_year} by" %> <%= link_to game.developer.name, developer_path(game.developer) %> 
+                <%= "Released in #{game.release_year}"%> <br>
+                by <%= link_to game.developer.name, developer_path(game.developer) %> 
             </span>
         </div>
 

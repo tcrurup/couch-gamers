@@ -3,7 +3,6 @@ class GamesController < ApplicationController
     before_action :require_login
 
     def create
-
         set_developer_by_id
 
         if current_user_works_for_developer? == true            
