@@ -37,7 +37,7 @@ class Developer < ApplicationRecord
     end
 
     def has_employee?(user)
-        self.employees.include?(user)
+        self.employees.include?(user) || self.owner == user
     end
 
     def has_game?(game)

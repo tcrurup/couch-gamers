@@ -51,7 +51,7 @@ class User < ApplicationRecord
     end
 
     def works_for?(developer)
-        self.developers.include?(developer)
+        self.developers.include?(developer) || self.ownedDeveloper === developer
     end
 
 end
