@@ -45,8 +45,14 @@ class UsersController < ApplicationController
     end
 
     def update
+        @developer = Developer.find_by(id: params[:developer_id])
         @user = User.find(params[:id])
-        if @user.authenticate(params[:user][:password])
+        
+        if(@developer)
+            @user.add_developer(@developer)
+            render :show        
+            
+        elsif @user.authenticate(params[:user][:password])
             if @user.update(user_params)
                 redirect_to user_path(@user)
             else

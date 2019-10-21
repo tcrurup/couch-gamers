@@ -2,7 +2,7 @@ class User < ApplicationRecord
 
     has_secure_password
 
-    has_one :ownedDeveloper,
+    has_one :owned_developer,
         class_name: "Developer"        
     
     has_many :user_developers
@@ -24,6 +24,10 @@ class User < ApplicationRecord
     def add_game(game)
         self.games << game unless self.has_game?(game)   
         game.users << self unless game.is_owned_by?(self) 
+    end
+
+    def developer_name
+        self.owned_developer.name
     end
 
     def remove_game(game)
@@ -51,7 +55,7 @@ class User < ApplicationRecord
     end
 
     def works_for?(developer)
-        self.developers.include?(developer) || self.ownedDeveloper === developer
+        self.developers.include?(developer) || self.owned_developer === developer
     end
 
 end

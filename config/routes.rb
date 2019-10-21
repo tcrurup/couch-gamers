@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :games do 
       resources :users, only: [:index]
     end
+    resources :users
   end
 
   resources :games, only: [:index]
