@@ -1,5 +1,5 @@
 <div class = 'game_card_container'>
     <% games.each do |game| %>
-        <%= render partial: "games/card", locals: {game: game, include_button: include_add_button_on_cards} %>
+        <%= render partial: "games/card", locals: {game: game}%>
     <% end %>
 </div>

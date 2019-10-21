@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#delete'
 
-  post '/add_to_current_users_games/:game_id' => 'users#add_to_current_users_games'
+  post '/add_to_current_users_games/:game_id' => 'users#add_game'
+  post '/remove_from_collection/:game_id' => 'users#remove_game'
 
   get '/auth/facebook/callback' => 'sessions#create'
   

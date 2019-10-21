@@ -24,6 +24,11 @@ class User < ApplicationRecord
         game.users << self unless game.is_owned_by?(self) 
     end
 
+    def remove_game(game)
+        self.games.delete(game)
+        game.users.delete(self)
+    end
+
     def full_name
         "#{self.first_name.capitalize} #{self.last_name.capitalize}"
     end

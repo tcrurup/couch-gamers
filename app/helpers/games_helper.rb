@@ -6,7 +6,7 @@ module GamesHelper
 
     def show_add_game_button_for(game)
         if current_user.has_game?(game)
-            button_tag "You Own This Game", disabled: true 
+            button_to "Remove From Collection", "/remove_from_collection/#{game.id}" 
         else
             button_to "Add To My Games", "/add_to_current_users_games/#{game.id}" 
         end

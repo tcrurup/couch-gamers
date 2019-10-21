@@ -3,17 +3,19 @@ class GamesController < ApplicationController
     before_action :require_login
 
     def create
-       
+
         set_developer_by_id
-        if current_user_works_for_developer? == true
-            
+
+        if current_user_works_for_developer? == true            
             @game = Game.new(game_params)
 
             if @game.valid?
                 @game.save
                 redirect_to developer_game_path(@game.developer, @game)
+
             else
                 render :new
+
             end
         else
             redirect_to user_path(current_user)
@@ -21,18 +23,18 @@ class GamesController < ApplicationController
     end
 
     def destroy
-        @game = Game.find_by(id: params[:id])
+        set_game_by_id
         set_developer_by_id
 
         errors = ["There was a problem with the following:"]
         errors << "#{@developer.name} does no own #{@game.title}" unless @developer.has_game?(@game)
         errors << "You are not a developer for #{@developer.name}" unless @developer.has_employee?(current_user)
         
-        if errors.length > 1 
-            flash_and_redirect_to_show_page(@game, errors.join(" "))       
-        else
+        if current_user_works_for_developer? == true && developer_owns_game == true
             @game.destroy
-            redirect_to games_path
+            redirect_to games_path    
+        else
+            redirect_to game_path(@game)
         end
     end
 
@@ -92,6 +94,14 @@ class GamesController < ApplicationController
             flash[:message] = "You dont work for #{@developer.name}"
         else
             true
+        end
+    end
+
+    def developer_owns_game
+        if @developer.has_game?(@game)
+            true
+        else
+            flash[:message] = "#{@developer.name} does not own #{@game.title}"
         end
     end
 

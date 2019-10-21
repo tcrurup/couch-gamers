@@ -1,8 +1,14 @@
 class UsersController < ApplicationController
 
-    def add_to_current_users_games
+    def add_game
         @game = Game.find_by(id: params[:game_id])
         current_user.add_game(@game)
+        redirect_to user_path(current_user)
+    end
+
+    def remove_game
+        game = Game.find_by(id: params[:game_id])
+        current_user.remove_game(game)
         redirect_to user_path(current_user)
     end
     

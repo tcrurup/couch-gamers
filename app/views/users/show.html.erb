@@ -1,9 +1,10 @@
 
 <%= render 'shared/flash_message' %>
-<%= render partial: "infobox", locals: {user: @user, include_go_to_button: false} %>
+<%= render partial: "infobox", locals: {user: @user} %>
+
 <%= link_to "edit profile", edit_user_path if @user == current_user%>
 
 
 <h3><%= "#{@user.username}'s Game Collection" %></h3>
-<%= render partial: "games/list", locals: {games: @user.games, include_add_button_on_cards: false} %>
+<%= render partial: "games/list", locals: {games: @user.games} %>
 
