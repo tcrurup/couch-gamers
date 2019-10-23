@@ -48,8 +48,16 @@ SQUARE_GAMES = [
     }
 ]
 
-rare = Developer.create({name: "Rare"})
-square = Developer.create({name: "Square"})
+USERS.each do |user|
+    User.create(user)
+end
+
+user1 = User.all[0]
+user2 = User.all[1] 
+
+
+rare = user1.create_developer(Developer.new({name: "Rare"}));
+square = user2.create_developer(Developer.new({name: "Square"}));
 
 RARE_GAMES.each do |game|
     rare.create_game(Game.new(game))
@@ -59,6 +67,4 @@ SQUARE_GAMES.each do |game|
     square.create_game(Game.new(game))
 end
 
-USERS.each do |user|
-    User.create(user)
-end
+

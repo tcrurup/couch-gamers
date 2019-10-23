@@ -26,6 +26,13 @@ class User < ApplicationRecord
         game.users << self unless game.is_owned_by?(self) 
     end
 
+    def create_developer(developer)
+        developer.tap do |x|
+            x.owner = self
+            x.save
+        end
+    end
+
     def developer_name
         self.owned_developer.name
     end

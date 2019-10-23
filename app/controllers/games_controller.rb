@@ -7,7 +7,7 @@ class GamesController < ApplicationController
         #Only developers and people employed by developers can create games
         set_developer_by_id
 
-        if current_user_works_for_developer?          
+        if @developer.has_employee?(current_user)         
             @game = @developer.create_game(Game.new(game_params))
             if @game.save                
                 redirect_to developer_game_path(@game.developer, @game)
@@ -26,18 +26,18 @@ class GamesController < ApplicationController
         
         #Checks to verify the current logged in user is a associated with the developer for that game and also that the game
         #belongs to that developer
-        if !current_user_works_for_developer? 
+        if !@developer.has_employee?(current_user)
             message = "You are not a developer for #{@developer.name}"
-        elsif !developer_owns_game
+        elsif !@developer.has_game?(@game)
             message = "#{@developer.name} does no own #{@game.title}"            
         end
         
-        if message
+        unless message
             message = "#{@game.title} has been removed" 
             @game.destroy
         end         
 
-        flash_and_redirect_to_show_page(message, @developer)        
+        flash_and_redirect_to_show_page(@developer, message)        
     end
 
     def edit
@@ -88,24 +88,6 @@ class GamesController < ApplicationController
     end
 
     private
-
-    def current_user_works_for_developer?        
-        if @developer.nil?
-            flash[:message] = "No developer with id#{params[:developer_id]}"
-        elsif !current_user.works_for?(@developer)
-            flash[:message] = "You dont work for #{@developer.name}"
-        else
-            true
-        end
-    end
-
-    def developer_owns_game
-        if @developer.has_game?(@game)
-            true
-        else
-            flash[:message] = "#{@developer.name} does not own #{@game.title}"
-        end
-    end
 
     def game_params
         params.require(:game).permit(:title, :description, :release_year, :developer_id)
