@@ -4,40 +4,32 @@ class GamesController < ApplicationController
     before_action :require_login
 
     def create
-        #Only developers and people employed by developers can create games
+        #Only developers owners and people employed by developers can create games
         set_developer_by_id
 
-        if @developer.has_employee?(current_user)         
+        if current_user_employed_at_developer        
             @game = @developer.create_game(Game.new(game_params))
-            if @game.save                
+            
+            if @game.valid?                
                 redirect_to developer_game_path(@game.developer, @game)
             else
                 render :new
             end
         else
-            redirect_to user_path(current_user)
+            message = "You are not a developer for #{@developer.name}" 
         end
     end
 
     def destroy
         set_game_by_id
         set_developer_by_id
-        message = nil;
         
-        #Checks to verify the current logged in user is a associated with the developer for that game and also that the game
-        #belongs to that developer
-        if !@developer.has_employee?(current_user)
-            message = "You are not a developer for #{@developer.name}"
-        elsif !@developer.has_game?(@game)
-            message = "#{@developer.name} does no own #{@game.title}"            
-        end
-        
-        unless message
-            message = "#{@game.title} has been removed" 
-            @game.destroy
-        end         
-
-        flash_and_redirect_to_show_page(@developer, message)        
+        if@game.valid_destroy?(current_user)
+            @game.destroy       
+            flash_and_redirect_to_show_page(@game.developer,"#{@game.title} has been removed")
+        else
+            render :show
+        end            
     end
 
     def edit
@@ -86,13 +78,21 @@ class GamesController < ApplicationController
         @game.update(game_params)
 
         if @game.valid?
-            redirect_to game_path(@game)
+            redirect_to developer_game_path(@game.developer, @game)
         else
             render :edit
         end
     end
 
     private
+
+    def current_user_employed_at_developer
+        @developer.has_employee?(current_user)
+    end 
+
+    def developer_owns_game
+        @developer.owns_game?(@game)
+    end
 
     def game_params
         params.require(:game).permit(:title, :description, :release_year, :developer_id)

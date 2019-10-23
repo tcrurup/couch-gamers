@@ -1,5 +1,6 @@
 <div class='page_container'>
     <%= render "shared/flash_message" %>
+    <%= render partial: "shared/flash_validations", locals: {object: @game} %>
 
     <%= render partial: 'card', locals: {game: @game, include_button: true} %>
 

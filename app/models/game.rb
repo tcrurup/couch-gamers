@@ -45,5 +45,14 @@ class Game < ApplicationRecord
     def user_count
         self.users.count
     end
+
+    def valid_destroy?(user)       
+        if self.developer.has_employee?(user)
+            true
+        else
+            errors.add :base, "You do not work for #{self.developer_name}"
+            false
+        end
+    end
     
 end
