@@ -1,3 +1,5 @@
-Are you a developer for a company not listed?  <%= link_to "Create New", new_developer_path%>
 
+<%= render partial: "shared/flash_message" %>
 <%= render partial: "create_table", locals:{developers: @developers} %>
+
+Are you a developer for a company not listed?  <%= link_to "Create New", new_developer_path%>

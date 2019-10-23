@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
         redirect_to :controller => object.class.table_name, :action=> 'show', :id => object.id
     end
 
+    def flash_and_redirect_to_index_page(object, message)
+        flash[:message] = message
+        redirect_to :controller => object.class.table_name, :action=> 'index'
+    end
+
     def require_login
         unless logged_in?
             flash[:message] = "You must be logged in to do that"

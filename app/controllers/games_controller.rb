@@ -46,12 +46,17 @@ class GamesController < ApplicationController
     
     def new
         set_developer_by_id
+        message = nil;
         if @developer.nil?
-            flash_and_redirect_to_show_page(current_user, "No developer with that id")
-        elsif current_user.works_for?(@developer)
-            @game = Game.new(developer_id: @developer.id)
+            message = "No developer with that id"
+        elsif !@developer.has_employee?(current_user)
+            message = "You don't work for #{@developer.name}"
+        end
+        
+        if(message)
+            flash_and_redirect_to_index_page(@developer, message)
         else
-            flash_and_redirect_to_show_page(current_user, "You don't work for #{@developer.name}")
+            @game = Game.new(developer_id: @developer.id)
         end
     end
 
