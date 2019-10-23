@@ -4,6 +4,7 @@ class GamesController < ApplicationController
     before_action :require_login
 
     def create
+        #Only developers and people employed by developers can create games
         set_developer_by_id
 
         if current_user_works_for_developer?          
@@ -21,17 +22,22 @@ class GamesController < ApplicationController
     def destroy
         set_game_by_id
         set_developer_by_id
-
-        errors = ["There was a problem with the following:"]
-        errors << "#{@developer.name} does no own #{@game.title}" unless @developer.has_game?(@game)
-        errors << "You are not a developer for #{@developer.name}" unless @developer.has_employee?(current_user)
+        message = nil;
         
-        if current_user_works_for_developer? == true && developer_owns_game == true
-            @game.destroy
-            redirect_to games_path    
-        else
-            redirect_to game_path(@game)
+        #Checks to verify the current logged in user is a associated with the developer for that game and also that the game
+        #belongs to that developer
+        if !current_user_works_for_developer? 
+            message = "You are not a developer for #{@developer.name}"
+        elsif !developer_owns_game
+            message = "#{@developer.name} does no own #{@game.title}"            
         end
+        
+        if message
+            message = "#{@game.title} has been removed" 
+            @game.destroy
+        end         
+
+        flash_and_redirect_to_show_page(message, @developer)        
     end
 
     def edit
