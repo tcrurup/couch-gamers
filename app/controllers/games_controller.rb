@@ -7,8 +7,7 @@ class GamesController < ApplicationController
         set_developer_by_id
 
         if current_user_works_for_developer?          
-            @game = Game.new(game_params)
-            @game.developer = @developer
+            @game = @developer.create_game(Game.new(game_params))
             if @game.save                
                 redirect_to developer_game_path(@game.developer, @game)
             else

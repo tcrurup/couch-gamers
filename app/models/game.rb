@@ -18,11 +18,15 @@ class Game < ApplicationRecord
         presence: true,
         inclusion: {
             in: 1960..Date.today.year,
-            message: "Release date must be between 1960 and current year" 
+            message: "must be between 1960 and current year" 
         }
 
     def developer_id
         self.developer.id
+    end
+
+    def developer_name
+        self.developer.name
     end
     
     def is_owned_by?(user)

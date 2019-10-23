@@ -24,9 +24,8 @@ class Developer < ApplicationRecord
 
     def create_game(game)
         game.developer = self
-        if game.save
-            self.games << game 
-        end
+        self.games << game if game.save
+        game
     end
 
     def employee_count

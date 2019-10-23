@@ -12,7 +12,10 @@
             <td><%= f.label :release_year %></td>
             <td><%= f.number_field :release_year %></td>
         </tr>
+        <tr>
+            <td><%= f.submit button_text %></td>
+        </tr>
     </table>
     <%= f.hidden_field :developer_id %>
-    <%= f.submit button_text %>
+    
 <% end %>

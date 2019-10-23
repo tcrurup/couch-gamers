@@ -1,4 +1,8 @@
+<div class='page_container'>
+    <span class='page_title'>
+        <%= "Create new game for #{@game.developer_name}" %>
+    </div>
+    <%= render partial: "shared/flash_validations", locals: {object: @game} %>
 
-<%= render partial: "shared/flash_validations", locals: {object: @game} %>
-
-<%= render partial: "form", locals: {game: @game, button_text: "Create"} %>
+    <%= render partial: "form", locals: {game: @game, button_text: "Create"} %>
+</div>

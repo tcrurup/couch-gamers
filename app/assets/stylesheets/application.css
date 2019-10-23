@@ -23,6 +23,10 @@
  }
 
  /*GAME CARD*/
+
+ form.new_game{
+     margin-top: 10vh;
+ }
  
  div.game_card{
     width: 500px;
@@ -102,6 +106,26 @@ div.game_card_header img{
     margin-bottom: 10px;
     text-align: center;
     width: 100%;
+ }
+
+ div.page_container{
+     width: 90%;
+     margin: auto;
+ }
+
+ span.page_title{
+     display: block;
+     font-size: 24px;
+     text-align: center;
+     margin-top: 10vh;
+     width: auto;
+ }
+
+ div.error_message{
+    width: 30%;
+    margin: auto;
+    font-weight: bold;
+    color: red;
  }
 
  table{

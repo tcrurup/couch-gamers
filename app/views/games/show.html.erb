@@ -1,10 +1,12 @@
-<%= render "shared/flash_message" %>
-<%= render partial: 'card', locals: {game: @game, include_button: true} %>
+<div class='page_container'>
+    <%= render "shared/flash_message" %>
 
+    <%= render partial: 'card', locals: {game: @game, include_button: true} %>
 
-<% if @game.has_developer?(current_user) %>
-    <%= button_to "Edit Game", edit_developer_game_path(@game), :method => :get %>
-    <%= form_tag(developer_game_path, :method => :delete) do %>
-        <%= submit_tag "Delete" %>
+    <% if @game.has_developer?(current_user) %>
+        <%= button_to "Edit Game", edit_developer_game_path(@game), :method => :get %>
+        <%= form_tag(developer_game_path, :method => :delete) do %>
+            <%= submit_tag "Delete" %>
+        <% end %>
     <% end %>
-<% end %>
+</div>
