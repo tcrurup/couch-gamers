@@ -46,13 +46,13 @@ class Game < ApplicationRecord
         self.users.count
     end
 
-    def valid_destroy?(user)       
+    def user_has_permission_to_CRUD?(user)       
         if self.developer.has_employee?(user)
             true
         else
             errors.add :base, "You do not work for #{self.developer_name}"
             false
         end
-    end
+    end  
     
 end

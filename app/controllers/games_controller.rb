@@ -6,17 +6,13 @@ class GamesController < ApplicationController
     def create
         #Only developers owners and people employed by developers can create games
         set_developer_by_id
-
-        if current_user_employed_at_developer        
-            @game = @developer.create_game(Game.new(game_params))
-            
-            if @game.valid?                
-                redirect_to developer_game_path(@game.developer, @game)
-            else
-                render :new
-            end
+        @game = @developer.new_game(Game.new(game_params))
+        
+        if @game.user_has_permission_to_CRUD?(current_user) && @game.valid?          
+            @game.save
+            redirect_to developer_game_path(@game.developer, @game)
         else
-            message = "You are not a developer for #{@developer.name}" 
+            render :new
         end
     end
 
@@ -24,7 +20,7 @@ class GamesController < ApplicationController
         set_game_by_id
         set_developer_by_id
         
-        if@game.valid_destroy?(current_user)
+        if@game.user_has_permission_to_CRUD?(current_user)
             @game.destroy       
             flash_and_redirect_to_show_page(@game.developer,"#{@game.title} has been removed")
         else
@@ -38,17 +34,10 @@ class GamesController < ApplicationController
     
     def new
         set_developer_by_id
-        message = nil;
-        if @developer.nil?
-            message = "No developer with that id"
-        elsif !@developer.has_employee?(current_user)
-            message = "You don't work for #{@developer.name}"
-        end
-        
-        if(message)
-            flash_and_redirect_to_index_page(@developer, message)
-        else
-            @game = Game.new(developer_id: @developer.id)
+        @game = Game.new(developer_id: @developer.id)
+
+        unless @game.user_has_permission_to_CRUD?(current_user)
+            render "developers/show"
         end
     end
 

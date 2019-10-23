@@ -1,5 +1,6 @@
 
 <%= render 'shared/flash_message' %>
+<%= render partial: 'shared/flash_validations', locals: {object: @game} unless @game.nil?%>
 
 <%= @developer.name %>
 <br>
@@ -8,6 +9,6 @@ owned by
 
 <%= button_to "Add Game", new_developer_game_path(@developer), :method => :get %>
 
-<%= render partial: 'employee_table', locals: {users: @developer.employees} %>
+<%= render partial: 'developers/employee_table', locals: {users: @developer.employees} %>
 <%= render partial: 'games/list', locals: {games: @developer.games} %>
 
