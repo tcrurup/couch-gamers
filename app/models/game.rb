@@ -1,15 +1,25 @@
 class Game < ApplicationRecord
 
-    scope :all_developed_by, -> {}
+    #create_table "games", force: :cascade do |t|
+    #    t.string "title"
+    #    t.text "description"
+    #    t.integer "release_year"
+    #    t.integer "developer_id"
+    #  end
 
-    #The optional is temporary, the developer should be the only one able to create games so should belong by default
-    belongs_to :developer, optional: true
+    belongs_to :developer
     
     has_many :user_games
     has_many :users, through: :user_games
 
     validates :title, presence: true
-    validates :release_year, presence: true
+    validates :description, presence: true
+    validates :release_year, 
+        presence: true,
+        inclusion: {
+            in: 1960..Date.today.year,
+            message: "Release date must be between 1960 and current year" 
+        }
 
     def developer_id
         self.developer.id

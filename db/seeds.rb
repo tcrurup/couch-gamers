@@ -52,11 +52,11 @@ rare = Developer.create({name: "Rare"})
 square = Developer.create({name: "Square"})
 
 RARE_GAMES.each do |game|
-    rare.add_game(Game.create(game))
+    rare.create_game(Game.new(game))
 end
 
 SQUARE_GAMES.each do |game|
-    square.add_game(Game.create(game))
+    square.create_game(Game.new(game))
 end
 
 USERS.each do |user|

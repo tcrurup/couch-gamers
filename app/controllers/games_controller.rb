@@ -1,20 +1,18 @@
 class GamesController < ApplicationController
     
+    #User must be logged in before an actions in the game contoller are allowed to take place
     before_action :require_login
 
     def create
         set_developer_by_id
 
-        if current_user_works_for_developer? == true            
+        if current_user_works_for_developer?          
             @game = Game.new(game_params)
-
-            if @game.valid?
-                @game.save
+            @game.developer = @developer
+            if @game.save                
                 redirect_to developer_game_path(@game.developer, @game)
-
             else
                 render :new
-
             end
         else
             redirect_to user_path(current_user)

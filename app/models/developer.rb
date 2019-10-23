@@ -22,10 +22,10 @@ class Developer < ApplicationRecord
         user.developers << self unless user.works_for?(self)
     end
 
-    def add_game(game)
-        unless self.has_game?(game)
+    def create_game(game)
+        game.developer = self
+        if game.save
             self.games << game 
-            game.developer = self
         end
     end
 
