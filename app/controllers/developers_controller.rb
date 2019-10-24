@@ -3,13 +3,7 @@ class DevelopersController < ApplicationController
     def create
         @developer = Developer.new(developer_params)
         @developer.owner = current_user
-        if @developer.valid?
-            
-            @developer.save
-            redirect_to developer_path(@developer)
-        else
-            render :new
-        end
+        @developer.save ? (redirect_to developer_path(@developer)) : (render :new)
     end
 
     def new
@@ -29,4 +23,5 @@ class DevelopersController < ApplicationController
     def developer_params
         params.require(:developer).permit(:name)
     end
+
 end

@@ -1,11 +1,20 @@
 class Developer < ApplicationRecord
 
-    has_many :user_developers
+    #create_table "developers", force: :cascade do |t|
+    #    t.string "name"
+    #    t.integer "user_id"
+    #  end
 
+    
+    #ASSOCIATIONS
     belongs_to :owner,
         foreign_key: "user_id",
         class_name:"User",
         optional: true
+
+    
+    has_many :games
+    has_many :user_developers
 
     has_many :employees, 
         through: :user_developers, 
@@ -13,10 +22,17 @@ class Developer < ApplicationRecord
         class_name:"User",
         source: :user
 
-    has_many :games
-
-    validates :name, presence: true
-
+    #VALIDATIONS
+    validates :name, 
+        presence:{
+            message: "can't be blank"
+        }
+    validates :user_id,
+        uniqueness:{
+            message: "can only be the owner of one developer studio"
+        }
+        
+    #FUNCTIONS  
     def add_employee(user)
         self.employees << user unless self.has_employee?(user)
         user.developers << self unless user.works_for?(self)
