@@ -2,10 +2,12 @@ class GamesController < ApplicationController
     
     #User must be logged in before an actions in the game contoller are allowed to take place
     before_action :require_login
+    before_action :set_developer_by_id, :except => [:edit, :index]
+    before_action :set_game_by_id, :only => [:destroy, :edit, :update]
+
+
 
     def create
-        #Only developers owners and people employed by developers can create games
-        set_developer_by_id
         @game = @developer.new_game(Game.new(game_params))
         
         if @game.user_has_permission_to_CRUD?(current_user) && @game.valid?          
@@ -16,10 +18,7 @@ class GamesController < ApplicationController
         end
     end
 
-    def destroy
-        set_game_by_id
-        set_developer_by_id
-        
+    def destroy  
         if@game.user_has_permission_to_CRUD?(current_user)
             @game.destroy       
             flash_and_redirect_to_show_page(@game.developer,"#{@game.title} has been removed")
@@ -29,11 +28,12 @@ class GamesController < ApplicationController
     end
 
     def edit
-        set_game_by_id
+        unless @game.user_has_permission_to_CRUD?(current_user)
+            render :show
+        end
     end
     
     def new
-        set_developer_by_id
         @game = Game.new(developer_id: @developer.id)
 
         unless @game.user_has_permission_to_CRUD?(current_user)
@@ -50,16 +50,11 @@ class GamesController < ApplicationController
     end
 
     def show
-        if params[:developer_id]
-            set_developer_by_id
-            @game = @developer.games.find_by(id: params[:id])
-            if @game.nil? 
-                message = "#{@developer.name} does not have a game with that id"
-                flash_and_redirect_to_show_page(@developer, message)
-            end                
-        else
-            set_game_by_id
-        end
+        @game = @developer.games.find_by(id: params[:id])
+        if @game.nil? 
+            message = "#{@developer.name} does not have a game with that id"
+            flash_and_redirect_to_show_page(@developer, message)
+        end                
     end
 
     def update
