@@ -38,7 +38,7 @@ class Developer < ApplicationRecord
         user.developers << self unless user.works_for?(self)
     end
 
-    def new_game(game_params)
+    def new_game(game_params={})
         Game.new(game_params).tap do |x|
             x.developer = self
         end

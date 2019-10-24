@@ -1,11 +1,11 @@
 class GamesController < ApplicationController
     
-    #User must be logged in before an actions in the game contoller are allowed to take place
     before_action :require_login
+    #User must be logged in before an actions in the game contoller are allowed to take place
+
     before_action :set_instance_variables
-
-
-
+    #@game - A game object if applicable or nil if :id not diven
+    #@developer - A developer object or nil if :developer_id not given
 
     def create
         @game = @developer.new_game(game_params)
@@ -13,16 +13,20 @@ class GamesController < ApplicationController
     end
 
     def destroy  
-        current_user_can_CRUD? ? (delete_game_and_redirect) : (redirect_to user_path(current_user))    
+        if current_user_can_CRUD?
+            delete_game_and_redirect
+        else
+            flash_and_redirect_to_game("You can't delete games for #{@developer.name}") 
+        end 
     end
 
     def edit
-        redirect_to developer_game_path(@developer, @game) unless current_user_can_CRUD?
+        flash_and_redirect_to_game("You can't edit games for #{@developer.name}") unless current_user_can_CRUD?
     end
     
     def new
-        @game = Game.new(developer_id: @developer.id)
-        redirect_to developer_path(@developer) unless current_user_can_CRUD?  
+        @game = @developer.new_game   
+        flash_and_redirect_to_developer("You can't add games for #{@developer.name}") unless current_user_can_CRUD?       
     end
 
     def index
@@ -30,7 +34,7 @@ class GamesController < ApplicationController
     end
 
     def show
-        flash_and_redirect_to_show_page(@developer,"#{@developer.name} does not have a game with that id") if @game.nil?         
+        flash_and_redirect_to_developer("#{@developer.name} does not have a game with that id") if @game.nil?         
     end
 
     def update
@@ -39,26 +43,28 @@ class GamesController < ApplicationController
     end
 
     private
-    def delete_game_and_redirect_to_developer
+    def delete_game_and_redirect
         @game.destroy       
-        flash_and_redirect_to_show_page(@game.developer,"#{@game.title} has been removed")
-    end
-
-    def developer_owns_game
-        @developer.owns_game?(@game)
+        flash_and_redirect_to_developer("#{@game.title} has been removed")
     end
 
     def game_params
         params.require(:game).permit(:title, :description, :release_year, :developer_id)
     end
 
-    def redirect_to_developer_through_game(game)
-        redirect_to developer_game_path(game.developer, game) 
+    def flash_and_redirect_to_developer(message)
+        flash[:message] = message
+        redirect_to developer_path(@developer)
+    end
+
+    def flash_and_redirect_to_game(message)
+        flash[:message] = message
+        redirect_to developer_game_path(@game.developer, @game)
     end
 
     def save_game_and_redirect
         @game.save
-        redirect_to developer_game_path(@game.developer, @game)
+        flash_and_redirect_to_game("#{@game.title} has been updated")
     end
 
     def set_instance_variables

@@ -2,12 +2,12 @@ class DevelopersController < ApplicationController
 
     def create
         @developer = Developer.new(developer_params)
-        @developer.owner = current_user
         @developer.save ? (redirect_to developer_path(@developer)) : (render :new)
     end
 
     def new
         @developer = Developer.new
+        @developer.owner = current_user
     end
 
     def index
