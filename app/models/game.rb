@@ -1,5 +1,6 @@
 class Game < ApplicationRecord
 
+    #SCHEMA
     #create_table "games", force: :cascade do |t|
     #    t.string "title"
     #    t.text "description"
@@ -7,11 +8,13 @@ class Game < ApplicationRecord
     #    t.integer "developer_id"
     #  end
 
+    #ASSOCIATIONS
     belongs_to :developer
 
     has_many :user_games
     has_many :users, through: :user_games
 
+    #VALIDATIONS
     validates :title, presence: true
     validates :description, presence: true
     validates :release_year, 
@@ -21,6 +24,7 @@ class Game < ApplicationRecord
             message: "must be between 1960 and current year" 
         }
 
+    #FUNCTIONS
     def developer_id
         self.developer.id
     end
