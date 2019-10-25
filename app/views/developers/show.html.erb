@@ -2,13 +2,18 @@
 <%= render 'shared/flash_message' %>
 <%= render partial: 'shared/flash_validations', locals: {object: @game} unless @game.nil?%>
 
-<%= @developer.name %>
-<br>
-owned by
-<%= link_full_name_to_show_page(@developer.owner) %>
+<div class='list_title'>
+    <%= @developer.name %>
+</div>
+
+
+
+<%= render partial: 'developers/employee_table', locals: {developer: @developer} %>
+
+<span class='page_title'>
+    <%= "Games created by #{@developer.name}"%>
+</span>
 
 <%= button_to "Add Game", new_developer_game_path(@developer), :method => :get %>
-
-<%= render partial: 'developers/employee_table', locals: {users: @developer.employees} %>
 <%= render partial: 'games/list', locals: {games: @developer.games} %>
 

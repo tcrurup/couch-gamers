@@ -60,6 +60,10 @@ class User < ApplicationRecord
         !self.developers.empty?
     end
 
+    def owned_developer_name
+        self.owned_developer.name
+    end
+
     def owns_developer?
         !!self.owned_developer
     end

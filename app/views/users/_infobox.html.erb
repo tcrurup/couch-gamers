@@ -21,8 +21,15 @@
                     <% end %>                    
                 </tr>            
             <% end %>
+
+            <% if user.owns_developer? %>
+                        <th class='label'>Owner of</th>
+                        <td><%= link_to user.owned_developer_name, developer_path(user.owned_developer)%></td>
+            <% end %>
         </table>
-        <%= button_to "Go to page", user_path(user), method: :get%>
+
+        <%= button_to "Go to page", user_path(user), method: :get unless user === current_user%>
+        <%= button_to "Edit profile", edit_user_path, method: :get if @user == current_user%>
         
         <% if current_user.owns_developer? && !user.works_for?(current_user.owned_developer) %>
             <%= button_to "Add to #{current_user.developer_name}", developer_user_path(current_user.owned_developer, user), method: :patch %>

@@ -1,10 +1,9 @@
-
 <%= render 'shared/flash_message' %>
-<%= render partial: "infobox", locals: {user: @user} %>
 
-<%= link_to "edit profile", edit_user_path if @user == current_user%>
+<%= render partial: "infobox", locals: {user: @user, current_user: current_user} %>
 
-
-<h3><%= "#{@user.username}'s Game Collection" %></h3>
+<div class='list_title'>
+    <%= "#{@user.username}'s game collection" %>
+</div>
 <%= render partial: "games/list", locals: {games: @user.games} %>
 
