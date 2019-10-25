@@ -1,7 +1,7 @@
 class DevelopersController < ApplicationController
 
     def create
-        @developer = Developer.new(developer_params)
+        @developer = current_user.new_developer(developer_params)
         @developer.save ? (redirect_to developer_path(@developer)) : (render :new)
     end
 
@@ -14,8 +14,7 @@ class DevelopersController < ApplicationController
     end
 
     def new
-        @developer = Developer.new
-        @developer.owner = current_user     
+        @developer = current_user.new_developer 
     end  
 
     def show
