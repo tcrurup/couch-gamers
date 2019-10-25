@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
 
     private
 
+    def flash_and_redirect_to_developer(message)
+        flash[:message] = message
+        redirect_to developer_path(@developer)
+    end
+
     def flash_and_redirect_to_show_page(object, message)
         flash[:message] = message
         redirect_to :controller => object.class.table_name, :action=> 'show', :id => object.id
@@ -21,6 +26,11 @@ class ApplicationController < ActionController::Base
             flash[:message] = "You must be logged in to do that"
             redirect_to login_path
         end
+    end
+
+    def save_and_redirect_to_show(object)
+        object.save
+        redirect_to :controller => object.class.table_name, :action=> 'show', :id => object.id
     end
 
     def logged_in?

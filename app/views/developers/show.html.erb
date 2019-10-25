@@ -3,10 +3,9 @@
 <%= render partial: 'shared/flash_validations', locals: {object: @game} unless @game.nil?%>
 
 <div class='list_title'>
-    <%= @developer.name %>
+    <%= @developer.name %><br>
+    <%= button_to "Edit", edit_developer_path(@developer), :method => :get if current_user === @developer.owner%>
 </div>
-
-
 
 <%= render partial: 'developers/employee_table', locals: {developer: @developer} %>
 

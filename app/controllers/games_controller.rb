@@ -9,7 +9,7 @@ class GamesController < ApplicationController
 
     def create
         @game = @developer.new_game(game_params)
-        current_user_can_CRUD? && @game.valid? ? (save_game_and_redirect) : (render :new)
+        current_user_can_CRUD? && @game.valid? ? (save_and_redirect_to_show(@game)) : (render :new)
     end
 
     def destroy  
@@ -39,7 +39,7 @@ class GamesController < ApplicationController
 
     def update
         @game.assign_attributes(game_params)
-        @game.valid? ? (save_game_and_redirect) : (render :edit)
+        @game.valid? ? (save_and_redirect_to_show(@game)) : (render :edit)
     end
 
     private
@@ -52,19 +52,9 @@ class GamesController < ApplicationController
         params.require(:game).permit(:title, :description, :release_year, :developer_id)
     end
 
-    def flash_and_redirect_to_developer(message)
-        flash[:message] = message
-        redirect_to developer_path(@developer)
-    end
-
     def flash_and_redirect_to_game(message)
         flash[:message] = message
         redirect_to developer_game_path(@game.developer, @game)
-    end
-
-    def save_game_and_redirect
-        @game.save
-        flash_and_redirect_to_game("#{@game.title} has been updated")
     end
 
     def set_instance_variables
