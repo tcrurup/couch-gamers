@@ -1,6 +1,8 @@
 class DevelopersController < ApplicationController
 
-    before_action :set_developer_by_id, only: [:edit, :show, :update]
+    before_action :set_developer_by_id, only: [:destroy, :edit, :show, :update]
+
+    before_action :verify_current_user_owns_developer, only: [:destroy, :edit, :update]
 
 
     def create
@@ -8,8 +10,15 @@ class DevelopersController < ApplicationController
         @developer.valid? ? (save_and_redirect_to_show(@developer)) : (render :new)
     end
 
+    def destroy
+        @developer.destroy
+        @developer.games.each do |game|
+            game.destroy
+        end
+        flash_and_redirect_to_user("#{@developer.name} has been deleted")
+    end
+
     def edit
-        flash_and_redirect_to_developer("Only the owner can make changes to #{@developer.name}") unless @developer.owner === current_user
     end
 
     def index
@@ -36,6 +45,10 @@ class DevelopersController < ApplicationController
 
     def set_developer_by_id
         @developer = Developer.find_by(id: params[:id])
+    end
+
+    def verify_current_user_owns_developer
+        flash_and_redirect_to_developer("Only the owner can make changes to #{@developer.name}") unless @developer.owner === current_user
     end
 
 

@@ -16,14 +16,21 @@
             <td><%= f.label :email %></td>
             <td><%= f.text_field :email %></td>
         </tr>
-        <tr> 
-            <th colspan=2>Enter Password To Confirm Changes</th> 
-        </tr>
         
-        <tr>
-            <td><%= f.label :password %></td>
-            <td><%= f.password_field :password %></td>
-        </tr>
+        <% if @user.set_pw %>
+            <tr> 
+                <th colspan=2>Enter password to confirm changes</th> 
+            </tr>
+        <% else %>
+            <tr> 
+                <th colspan=2>Set a password for your account</th> 
+            </tr>
+        <% end %>
+            <tr>
+                <td><%= f.label :password %></td>
+                <td><%= f.password_field :password %></td>
+            </tr>
+       
     </table>
 
 

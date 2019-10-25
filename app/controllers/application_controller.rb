@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
         redirect_to developer_path(@developer)
     end
 
+    def flash_and_redirect_to_user(message)
+        flash[:message] = message
+        redirect_to user_path(current_user)
+    end
+
     def flash_and_redirect_to_show_page(object, message)
         flash[:message] = message
         redirect_to :controller => object.class.table_name, :action=> 'show', :id => object.id

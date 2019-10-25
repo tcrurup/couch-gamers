@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_21_215649) do
+ActiveRecord::Schema.define(version: 2019_10_25_223811) do
 
   create_table "developers", force: :cascade do |t|
     t.string "name"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_10_21_215649) do
     t.integer "developer_id"
     t.string "uid"
     t.string "image"
+    t.boolean "set_pw", default: true
   end
 
 end

@@ -56,15 +56,18 @@ user1 = User.all[0]
 user2 = User.all[1] 
 
 
-rare = user1.create_developer(Developer.new({name: "Rare"}));
-square = user2.create_developer(Developer.new({name: "Square"}));
+rare = user1.new_developer({name: "Rare"});
+square = user2.new_developer({name: "Square"});
+
+rare.save
+square.save
 
 RARE_GAMES.each do |game|
-    rare.create_game(Game.new(game))
+    rare.create_game(game)
 end
 
 SQUARE_GAMES.each do |game|
-    square.create_game(Game.new(game))
+    square.create_game(game)
 end
 
 

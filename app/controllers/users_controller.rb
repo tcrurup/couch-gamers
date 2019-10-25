@@ -50,9 +50,13 @@ class UsersController < ApplicationController
         
         if(@developer)
             @user.add_developer(@developer)
-            render :show        
+            render :show       
+        elsif @user.authenticate(params[:user][:password]) || !@user.set_pw
             
-        elsif @user.authenticate(params[:user][:password])
+            if params[:user][:password] && !@user.set_pw
+                @user.set_pw = true
+            end
+
             if @user.update(user_params)
                 redirect_to user_path(@user)
             else

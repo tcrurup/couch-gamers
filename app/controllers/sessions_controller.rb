@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
                 u.password = random_password
                 u.email = auth['info']['email']
                 u.image = auth['info']['image']
+                u.set_pw = false
             end
             session[:user_id] = @user.id
             redirect_to user_path (@user)            

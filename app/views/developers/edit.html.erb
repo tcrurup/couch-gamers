@@ -1,1 +1,2 @@
 <%= render partial: "form", locals: {developer: @developer, button_text: "Update"} %>
+<%= button_to "Delete", developer_path(@developer), :method => :delete %>
