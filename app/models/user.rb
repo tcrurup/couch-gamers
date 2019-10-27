@@ -1,7 +1,20 @@
 class User < ApplicationRecord
 
+    #create_table "users", force: :cascade do |t|
+    #    t.string "username"
+    #    t.string "first_name"
+    #    t.string "last_name"
+    #    t.string "email"
+    #    t.string "password_digest"
+    #    t.integer "developer_id"
+    #    t.string "uid"
+    #    t.string "image"
+    #    t.boolean "set_pw", default: true
+    #end
+    
     has_secure_password
 
+    #ASSOCIATIONS
     has_one :owned_developer,
         class_name: "Developer"        
     
@@ -11,10 +24,19 @@ class User < ApplicationRecord
     has_many :user_games
     has_many :games, through: :user_games
     
+    #CALLBACKS
+
+    #SCOPES
+    scope :facebook_users, -> { where("uid > 0") }
+
+
+    #VALIDATIONS
     validates :username, presence: true
     validates :first_name, presence: true
     validates :last_name, presence: true
     validates :email, presence: true
+
+    #FUNCTIONS
 
     def add_developer(developer)
         self.developers << developer unless self.works_for?(developer)
