@@ -14,6 +14,9 @@ class Game < ApplicationRecord
     has_many :user_games
     has_many :users, through: :user_games
 
+    #SCOPES
+    scope :created_by, ->(developer_id) { where("developer_id = ?", developer_id) } 
+
     #VALIDATIONS
     validates :title, presence: true
     validates :description, presence: true
