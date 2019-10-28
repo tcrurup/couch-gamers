@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-    before_action :set_game_by_param_id, only: [:add_game, :remove_game]
+
+    before_action :set_instance_variables, only: [:add_game, :index, :remove_game]
 
     def add_game
         current_user.add_game(@game)
@@ -22,13 +23,7 @@ class UsersController < ApplicationController
     end
 
     def index
-        if params[:developer_id] && params[:game_id]
-            @developer = Developer.find_by(id: params[:developer_id])
-            @game = @developer.games.find_by(id: params[:game_id])
-            @users = @game.users
-        else 
-            @users = User.all
-        end
+        @game ? (@users = @game.users):(@users = User.all)
     end
     
     def new
@@ -69,8 +64,27 @@ class UsersController < ApplicationController
         redirect_to user_path(@user)
     end
 
-    def set_game_by_param_id
-        @game = Game.find_by(id: params[:game_id])
+    def set_developer_by_id
+        if params[:developer_id]
+            @developer = Developer.find_by(id: params[:developer_id])
+        else
+            @developer = nil
+        end
+    end
+
+    def set_game_by_id
+        if @developer
+            @game = @developer.games.find_by(id: params[:game_id])
+        elsif params[:game_id]
+            @game = Game.find_by(id: params[:game_id])
+        else
+            @game = nil
+        end
+    end
+
+    def set_instance_variables
+        set_developer_by_id
+        set_game_by_id
     end
 
     def user_params
