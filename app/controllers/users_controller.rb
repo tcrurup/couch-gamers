@@ -1,7 +1,17 @@
 class UsersController < ApplicationController
+    
+    before_action :set_instance_variables, 
+        only: [
+            :add_game, 
+            :index, 
+            :remove_game
+        ]
 
-
-    before_action :set_instance_variables, only: [:add_game, :index, :remove_game]
+    before_action :set_user_by_id, 
+        only: [
+            :show, 
+            :update
+        ]
 
     def add_game
         current_user.add_game(@game)
@@ -31,12 +41,10 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find(params[:id])
     end
 
     def update
-        @developer = Developer.find_by(id: params[:developer_id])
-        @user = User.find(params[:id])
+        set_developer_by_id
         
         if(@developer)
             @user.add_developer(@developer)
@@ -80,6 +88,10 @@ class UsersController < ApplicationController
         else
             @game = nil
         end
+    end
+
+    def set_user_by_id
+        @user = User.find(params[:id])
     end
 
     def set_instance_variables
