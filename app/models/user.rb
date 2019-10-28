@@ -1,5 +1,20 @@
 class User < ApplicationRecord
-
+    
+    #CLASS FUNCTIONS
+    #facebook_users - A collection of Users that are associated with a Facebook login
+    
+    #INSTANCE FUNCTIONS
+    #username - This Users chosen username
+    #first_name - This Users first name
+    #last_name - This Users last name
+    #email - This Users email
+    #image - A string representing a URL to an image for this user
+    #uid - Associated with the facebook Omniauth
+    #set_pw - Boolean if the user has set their own password or not
+    #owned_developer - The Developer that is owned by this User if applicable
+    #developers - A collection of Developer objects that this User works for
+    #games - A collection of Games that belong to this User
+    
     #create_table "users", force: :cascade do |t|
     #    t.string "username"
     #    t.string "first_name"
@@ -16,13 +31,17 @@ class User < ApplicationRecord
 
     #ASSOCIATIONS
     has_one :owned_developer,
-        class_name: "Developer"        
+        class_name: "Developer" 
     
     has_many :user_developers
     has_many :developers, through: :user_developers
 
     has_many :user_games
     has_many :games, through: :user_games
+    
+    has_many :supported_developers,
+        through: :games,
+        source: :developer
     
     #CALLBACKS
 
