@@ -1,26 +1,20 @@
 class UsersController < ApplicationController
 
+    before_action :set_game_by_param_id, only: [:add_game, :remove_game]
+
     def add_game
-        @game = Game.find_by(id: params[:game_id])
         current_user.add_game(@game)
-        redirect_to user_path(current_user)
+        redirect_to_current_user
     end
 
     def remove_game
-        game = Game.find_by(id: params[:game_id])
-        current_user.remove_game(game)
-        redirect_to user_path(current_user)
+        current_user.remove_game(@game)
+        redirect_to_current_user
     end
     
     def create
         @user = User.new(user_params)
-        puts @user
-        if @user.valid?
-            @user.save
-            login(@user)
-        else
-            render :new
-        end
+        @user.save ? (login(@user)):(render :new)
     end
 
     def edit
@@ -73,6 +67,10 @@ class UsersController < ApplicationController
     def login(user)
         session[:user_id] = user.id
         redirect_to user_path(@user)
+    end
+
+    def set_game_by_param_id
+        @game = Game.find_by(id: params[:game_id])
     end
 
     def user_params
