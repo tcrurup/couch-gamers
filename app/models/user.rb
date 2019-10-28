@@ -31,10 +31,21 @@ class User < ApplicationRecord
 
 
     #VALIDATIONS
-    validates :username, presence: true
+    validates :username, 
+        presence: true,
+        uniqueness: {
+            message: "is already in use"    
+        }
+
+    
+    validates :email, 
+        presence: true,
+        uniqueness: {
+            message: " is already in user by another user"
+        }
+
     validates :first_name, presence: true
     validates :last_name, presence: true
-    validates :email, presence: true
 
     #FUNCTIONS
 
