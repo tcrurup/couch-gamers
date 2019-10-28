@@ -10,4 +10,6 @@
             <%= submit_tag "Delete" %>
         <% end %>
     <% end %>
+
+    <%= render partial: 'users/list', locals: {users: @game.users, list_title: "Members who have #{@game.title}"} %>
 </div>
