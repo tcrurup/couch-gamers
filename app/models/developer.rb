@@ -1,5 +1,11 @@
 class Developer < ApplicationRecord
-
+    #name - Name of the Developer
+    #owner - The user object that the Developer belongs to
+    #games - A collection of game objects the Developer owns
+    #players - A collection of users that own at least one game from this Developer
+    #employees - A collection of users that are each developers for this Developer    
+    
+    #SCHEMA
     #create_table "developers", force: :cascade do |t|
     #    t.string "name"
     #    t.integer "user_id"
@@ -12,8 +18,12 @@ class Developer < ApplicationRecord
         class_name:"User",
         optional: true
 
-    
     has_many :games
+
+    has_many :players,
+        through: :games,
+        source: :users
+
     has_many :user_developers
 
     has_many :employees, 
