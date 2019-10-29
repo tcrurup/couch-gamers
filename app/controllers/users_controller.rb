@@ -22,6 +22,11 @@ class UsersController < ApplicationController
         current_user.remove_game(@game)
         redirect_to_current_user
     end
+
+    def facebook_users
+        @users = User.facebook_users
+        render :index
+    end
     
     def create
         @user = User.new(user_params)

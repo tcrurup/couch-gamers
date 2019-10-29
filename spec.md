@@ -16,7 +16,7 @@ Specs:
 - [x] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item)
     -All models include some basic validation for uniqueness and precense
 - [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
-    -STILL DO
+    User.facebook_users URL /users/facebook_users
 
 - [x] Include signup (how e.g. Devise)
 - [x] Include login (how e.g. Devise)

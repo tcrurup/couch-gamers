@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   post '/remove_from_collection/:game_id' => 'users#remove_game'
 
   get '/auth/facebook/callback' => 'sessions#create'
+
+  get '/users/facebook_users' => 'users#facebook_users'
   
 
   resources :developers do
