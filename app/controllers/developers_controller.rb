@@ -1,6 +1,7 @@
 class DevelopersController < ApplicationController
 
     before_action :set_developer_by_id, only: [:destroy, :edit, :show, :update]
+    before_action :require_login
 
     before_action :verify_current_user_owns_developer, only: [:destroy, :edit, :update]
 

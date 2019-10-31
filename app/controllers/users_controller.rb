@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
     
+    before_action :require_login,
+        except: [
+            :create,
+            :new
+        ]
+    
     before_action :set_instance_variables, 
         only: [
             :add_game, 
