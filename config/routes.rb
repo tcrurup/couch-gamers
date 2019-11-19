@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback' => 'sessions#create'
 
   get '/users/facebook_users' => 'users#facebook_users'
+
+  post '/games/favorite/:id' => 'games#favorite', as: "game_favorite"
   
 
   resources :developers do

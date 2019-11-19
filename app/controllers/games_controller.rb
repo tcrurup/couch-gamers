@@ -3,7 +3,7 @@ class GamesController < ApplicationController
     before_action :require_login
     #User must be logged in before an actions in the game contoller are allowed to take place
 
-    before_action :set_instance_variables
+    before_action :set_instance_variables, except: [:favorite]
     #@game - A game object if applicable or nil if :id not diven
     #@developer - A developer object or nil if :developer_id not given
 
@@ -18,6 +18,12 @@ class GamesController < ApplicationController
         else
             flash_and_redirect_to_game("You can't delete games for #{@developer.name}") 
         end 
+    end
+
+    def favorite
+        @game = Game.find_by(id: params[:id])
+        @game.toggle_favorite(current_user)
+        redirect_back(fallback_location: root_path)
     end
 
     def edit

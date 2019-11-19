@@ -29,7 +29,9 @@
     <div class='game_card_footer'>
 
         <%= show_member_count_as_link_to_developer_game_user_path_for(game) %><br>
-        <%= show_add_game_button_for(game)%>       
+        <%= show_add_game_button_for(game)%>  
+        <% game.favorited?(current_user) ? text = 'Favorited' : text = 'Favorite?' %>
+        <%= link_to text, game_favorite_path(game), :method => 'post' %>     
 
     </div>
 </div>

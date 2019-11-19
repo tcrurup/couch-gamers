@@ -35,6 +35,10 @@ class Game < ApplicationRecord
     def developer_name
         self.developer.name
     end
+
+    def favorited?(user)
+        UserGame.find_or_create_by(game_id: self.id, user_id: user.id).favorited
+    end
     
     def is_owned_by?(user)
         self.users.include?(user)
@@ -47,6 +51,20 @@ class Game < ApplicationRecord
     def add_user(user)
         self.users << user unless self.is_owned_by(user)
         user.games << self unless user.has_game?(self)
+    end
+
+    def toggle_favorite(user)
+        userGame = UserGame.find_or_create_by(game_id: self.id, user_id: user.id)
+        binding.pry
+        if userGame.favorited
+            binding.pry
+            userGame.favorited = false
+        else
+            binding.pry
+            userGame.favorited = true
+        end
+        binding.pry
+        userGame.save
     end
 
     def user_count
